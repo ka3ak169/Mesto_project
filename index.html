@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место Россия</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./image/VectorlogoW.svg" alt="лого">
+    </header>
+    <main class="content">
+    <section class="profile">
+      <div class="profile__container">
+        <img class="profile__avatar" src="./image/жак.png" alt="Жак-Ив Кусто">
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <p class="profile__activity">Исследователь океана</p>
+          <button class="profile__edit-button" type="button"></button>
+        </div>
+    </div>
+      <button class="profile__add-button" type="button"></button>
+    </section>
+  <section class="elements"> 
+      </section>
+    </main>
+      <footer class="footer">
+        <p class="footer__autograph">© 2022 Mesto Russia</p>
+      </footer>
+      <!-- profile popup -->
+        <!-- <div class="popup profile-popup popup_opened"> -->
+        <div class="popup profile-popup">
+            <div class="profile-popup__container">
+              <h2 class="profile-popup__heading">Редактировать профиль</h2>
+              <button class="profile-popup__close-button" name="close" type="button"></button>
+              <form class="profile-popup__form popup__form" name="formProfile" novalidate>
+                <fieldset class="profile-popup__field">
+                  <input class="popup__form-input profile-popup-name" id="profile-name-input" type="text" name="name" value="" placeholder="Имя" 
+                          minlength="2" maxlength="40" required>
+                  <span class="error profile-name-input-error"></span>
+                  <input class="popup__form-input profile-popup-activity" id="profile-activity-input" type="text" name="activity" value="" placeholder="Вид деятельности"
+                          minlength="2" maxlength="200" required>
+                  <span class="error profile-activity-input-error"></span>
+                </fieldset>
+                <button class="submit-button" type="submit" name="profile-submit">Сохранть</button>
+              </form>
+            </div>
+          </div>
+       <!-- card popup -->
+        <!-- <div class="popup card-popup popup_opened"> -->
+        <div class="popup card-popup">
+            <div class="card-popup__container">
+              <h2 class="card-popup__heading">Новое место</h2>
+              <button class="card-popup__close-button" name="close" type="button"></button>
+              <form class="card-popup__form popup__form" novalidate>
+                <fieldset class="card-popup__field">
+                  <input type="text" class="popup__form-input card-popup-name" id="card-name-input" name="name" value="" placeholder="Название" 
+                  minlength="2" maxlength="30" required>
+                  <span class="error card-name-input-error"></span>
+                  <input type="url" class="popup__form-input card-popup-activity" id="card-activity-input" name="activity" value="" placeholder="Ссылка на картинку" required>
+                  <span class="error card-activity-input-error"></span>
+                </fieldset>
+                <button class="submit-button submit-button_invalid" type="submit" name="card-submit">Создать</button>
+              </form>
+            </div>
+          </div>
+        <!-- image popop -->
+            <!-- <div class="popup image-popup popup_opened"> -->
+              <div class="popup image-popup">
+              <div class="image-popup__container">
+                <button class="image-popup__close-button" name="close" type="button"></button>
+                <img class="image-popup__image" src="#" alt="">
+                <p class="image-popup__description"></p>
+              </div>
+            </div>
+          <!-- card box -->
+          <template class="card-template">
+            <div class="elements__element">
+              <img class="elements__image" alt="" src="#">
+              <div class="elements__group">
+                <h2 class="elements__place"></h2>
+                <button class="elements__like" type="button"></button>
+              </div>
+              <button class="elements__trash" type="button"></button>
+            </div>
+          </template>
+        <script src="./scripts/index.js"></script>
+        <script src="./scripts/validate.js"></script>
+</body>
+</html>
