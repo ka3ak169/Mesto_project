@@ -18,4 +18,4 @@
 * корректная работа кнопки лайк
 * доюавление дополнительных карточек
 
-[ссылка на Git]  (https://ka3ak169.github.io/Sprint_4/)
+[ссылка на Git]  (https://ka3ak169.github.io/Mesto_project/)
