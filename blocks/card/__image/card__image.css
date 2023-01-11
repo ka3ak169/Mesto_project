@@ -1,4 +1,4 @@
-.elements__image {
+.card__image {
     object-fit: cover;
     cursor: pointer;
     max-height: 100%;

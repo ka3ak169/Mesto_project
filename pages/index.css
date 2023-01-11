@@ -17,15 +17,15 @@
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
-/* блок elements */
-@import url(../blocks/elements/elements.css);
-@import url(../blocks/elements/__element/elements__element.css);
-@import url(../blocks/elements/__group/elements__group.css);
-@import url(../blocks/elements/__image/elements__image.css);
-@import url(../blocks/elements/__like/elements__like.css);
-@import url(../blocks/elements/__place/elements__place.css);
-@import url(../blocks/elements/__trash/elements__trash.css);
-@import url(../blocks/elements/__like/_active/elements__like_active.css);
+/* блок card */
+@import url(../blocks/card/cards.css);
+@import url(../blocks/card/__element/card__element.css);
+@import url(../blocks/card/__group/card__group.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__like/card__like.css);
+@import url(../blocks/card/__place/card__place.css);
+@import url(../blocks/card/__trash/card__trash.css);
+@import url(../blocks/card/__like/_active/card__like_active.css);
 /* блок footer */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__autograph/footer__autograph.css);
