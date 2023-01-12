@@ -31,13 +31,13 @@ export class Card {
     this._cardElement.querySelector('.card__like').classList.toggle('card__like_active');
   };
 
-  _openCardPopup = () => {
+  _openImagePopup = () => {
     openImagePopup(this._name, this._link);
   };
 
   _setEventListeners() {
     this._cardElement.querySelector('.card__trash').addEventListener('click', this._cardTrash);
     this._cardElement.querySelector('.card__like').addEventListener('click', this._cardLike);
-    this._cardElement.querySelector('.card__image').addEventListener('click', this._openCardPopup);
+    this._cardElement.querySelector('.card__image').addEventListener('click', this._openImagePopup);
   };
 };
