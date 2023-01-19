@@ -1,11 +1,11 @@
-import Card from '../components/Card.js';
-import FormValidator from "../components/FormValidator.js";
-import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
+import Card from '../src/components/Card.js';
+import FormValidator from "../src/components/FormValidator.js";
+import Section from '../src/components/Section.js';
+import Popup from '../src/components/Popup.js';
 import {
   cardTemplate,
   cardsContainer,
-} from '../utils/constant.js'
+} from '../src/utils/constant.js'
 
 
 const profilePopupContainer = document.querySelector('.profile-popup');
