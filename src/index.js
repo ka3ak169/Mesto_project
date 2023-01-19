@@ -1,10 +1,13 @@
-import { Card } from '../components/Card.js';
-import { FormValidator } from "../components/FormValidator.js";
+import Card from '../components/Card.js';
+import FormValidator from "../components/FormValidator.js";
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
+import {
+  cardTemplate,
+  cardsContainer,
+} from '../utils/constant.js'
 
 
-const cardsContainer = document.querySelector('.cards');
 const profilePopupContainer = document.querySelector('.profile-popup');
 const profileEditBtn = document.querySelector('.profile__edit-button');
 const profilePopupForm = profilePopupContainer.querySelector(
@@ -21,7 +24,11 @@ const profilePopupInputActivity = profilePopupContainer.querySelector(
 );
 const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
+
+
 const page = document.querySelector('.page');
+page.addEventListener('keydown', (evt) => {console.log(evt.key)});
+
 const cardPopupAddBtn = document.querySelector('.profile__add-button');
 const cardPopupElement = document.querySelector('.card-popup');
 const cardPopupCloseBtn = cardPopupElement.querySelector(
@@ -40,16 +47,16 @@ const imagePopupLink = imagePopupContainer.querySelector('.image-popup__image');
 const imagePopupСaption = imagePopupContainer.querySelector(
   '.image-popup__description'
 );
-const cardTemplate = '.card-template';
+
 
 export function openPopup(popupName) {
   popupName.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEscBtn);
+  // document.addEventListener('keydown', closePopupEscBtn);
 };
 
 function closePopup(popupName) {
   popupName.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEscBtn);
+  // document.removeEventListener('keydown', closePopupEscBtn);
 };
 
 function bindPopupOverlayClickHandler(popupName) {
@@ -61,12 +68,12 @@ function bindPopupOverlayClickHandler(popupName) {
   });
 };
 
-function closePopupEscBtn(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
+// function closePopupEscBtn(evt) {
+//   if (evt.key === 'Escape') {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     closePopup(openedPopup);
+//   }
+// };
 
 function openProfilePopup() {
   openPopup(profilePopupContainer);
@@ -90,9 +97,6 @@ export const openImagePopup = function (name, link) {
   openPopup(imagePopupContainer);
 };
 
-imagePopupCloseBtn.addEventListener('click', function () {
-  closePopup(imagePopupContainer);
-});
 
 const cardsData = [
   {
@@ -153,36 +157,40 @@ const handleAddCardFormSubmit = function (event) {
   closePopup(cardPopupElement);
 };
 
-const open = new Popup(profilePopupContainer);
+const ProfilePopup = new Popup(profilePopupContainer);
 
 profileEditBtn.addEventListener('click', function () {
-  open.open();
+  ProfilePopup.open();
 });
 
 profilePopupCloseBtn.addEventListener('click', function () {
-  open.close();
+  ProfilePopup.close();
 });
 
-// profileEditBtn.addEventListener('click', function () {
-//   openProfilePopup();
-// });
+profileEditBtn.addEventListener('click', function () {
+  openProfilePopup();
+});
 // profilePopupCloseBtn.addEventListener('click', function () {
 //   closePopup(profilePopupContainer);
 // });
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
+
+imagePopupCloseBtn.addEventListener('click', function () {
+  closePopup(imagePopupContainer);
+});
 cardPopupAddBtn.addEventListener('click', function () {
   openPopup(cardPopupElement);
 });
-cardPopupCloseBtn.addEventListener('click', function () {
-  closePopup(cardPopupElement);
-});
+// cardPopupCloseBtn.addEventListener('click', function () {
+//   closePopup(cardPopupElement);
+// });
 cardPopupFrom.addEventListener('submit', handleAddCardFormSubmit);
-bindPopupOverlayClickHandler(cardPopupElement);
-bindPopupOverlayClickHandler(imagePopupContainer);
-bindPopupOverlayClickHandler(profilePopupContainer);
-closePopupEscBtn(cardPopupElement);
-closePopupEscBtn(imagePopupContainer);
-closePopupEscBtn(profilePopupContainer);
+// bindPopupOverlayClickHandler(cardPopupElement);
+// bindPopupOverlayClickHandler(imagePopupContainer);
+// bindPopupOverlayClickHandler(profilePopupContainer);
+// closePopupEscBtn(cardPopupElement);
+// closePopupEscBtn(imagePopupContainer);
+// closePopupEscBtn(profilePopupContainer);
 
 const popupData = {
   input: '.popup__form-input',
