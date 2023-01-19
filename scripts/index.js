@@ -1,5 +1,8 @@
-import { Card } from './Card.js';
-import { FormValidator } from "./FormValidator.js";
+import { Card } from '../components/Card.js';
+import { FormValidator } from "../components/FormValidator.js";
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
+
 
 const cardsContainer = document.querySelector('.cards');
 const profilePopupContainer = document.querySelector('.profile-popup');
@@ -37,6 +40,7 @@ const imagePopupLink = imagePopupContainer.querySelector('.image-popup__image');
 const imagePopupСaption = imagePopupContainer.querySelector(
   '.image-popup__description'
 );
+const cardTemplate = '.card-template';
 
 export function openPopup(popupName) {
   popupName.classList.add('popup_opened');
@@ -117,17 +121,21 @@ const cardsData = [
   },
 ];
 
-// создаем карточку
-const createCard = function (cardData) {
-  const card = new Card(cardData, '.card-template');
+const renderer = function(item) {
+  const card = new Card(item, cardTemplate);
   const cardElement = card.generateCard();
-  return cardElement;
-};
+  
+  defaultCardList.addItem(cardElement);
+}
 
-// изначальные карточки
-cardsData.forEach((cardData) => {
-  cardsContainer.prepend(createCard(cardData));
-});
+const defaultCardList = new Section(
+  { items: cardsData,
+    renderer
+  },
+  cardsContainer
+);
+
+defaultCardList.renderItem();
 
 // // слушатель submit card-popup
 const handleAddCardFormSubmit = function (event) {
@@ -137,7 +145,7 @@ const handleAddCardFormSubmit = function (event) {
     link: cardPopupInputLink.value,
   };
 
-  cardsContainer.prepend(createCard(cardData));
+  renderer(cardData);
 
   cardPopupFrom.reset();
   cardPopupValiadator.disableSubmitButton();
@@ -145,12 +153,22 @@ const handleAddCardFormSubmit = function (event) {
   closePopup(cardPopupElement);
 };
 
+const open = new Popup(profilePopupContainer);
+
 profileEditBtn.addEventListener('click', function () {
-  openProfilePopup();
+  open.open();
 });
+
 profilePopupCloseBtn.addEventListener('click', function () {
-  closePopup(profilePopupContainer);
+  open.close();
 });
+
+// profileEditBtn.addEventListener('click', function () {
+//   openProfilePopup();
+// });
+// profilePopupCloseBtn.addEventListener('click', function () {
+//   closePopup(profilePopupContainer);
+// });
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 cardPopupAddBtn.addEventListener('click', function () {
   openPopup(cardPopupElement);
@@ -177,3 +195,6 @@ const profilePopupValiadator = new FormValidator(popupData, profilePopupForm);
 
 cardPopupValiadator.enableValidation();
 profilePopupValiadator.enableValidation();
+
+// const section = new Section('ivan'); 
+// section.getName();
