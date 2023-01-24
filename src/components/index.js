@@ -2,12 +2,15 @@ import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
 import Section from './Section.js';
 import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 import {
   cardTemplate,
   cardsContainer,
 } from '../utils/constant.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
+
+
 
 
 const profilePopupContainer = document.querySelector('.profile-popup');
@@ -26,6 +29,11 @@ const profilePopupInputActivity = profilePopupContainer.querySelector(
 );
 const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
+
+// const profileName = '.profile__name';
+// const profileActivity = '.profile__activity';
+
+
 
 
 const page = document.querySelector('.page');
@@ -146,10 +154,11 @@ imagePopup.setEventListeners();
 // card Popup
 
 const cardPopupWithForm = new PopupWithForm(cardPopupElement, handleAddCardFormSubmit);
-// cardPopupWithForm.setEventListeners();
-// const cardPopup = new Popup(cardPopupElement);
+cardPopupWithForm.setEventListeners();
+const cardPopup = new Popup(cardPopupElement);
+
 cardPopupAddBtn.addEventListener('click', function () {
-  cardPopupWithForm.open();
+  cardPopup.open();
 });
 // cardPopup.setEventListeners();
 
@@ -164,30 +173,69 @@ function handleAddCardFormSubmit (data) {
   renderer(data);
 
   cardPopupValiadator.disableSubmitButton();
-  cardPopupFrom.reset();
+  // cardPopupFrom.reset();
 
-  cardPopupWithForm.close();
+  // cardPopupWithForm.close();
 };
+
+
+
+
+const userInfo = new UserInfo( {name: profileName, activity: profileActivity} );
+// const rumba = userInfo.getUserInfo();
+// userInfo.setUserInfo;
+
+// userInfo.setUserInfo();
+// console.log(rumba);
+// function openProfilePopup(data) {
+  // data = {
+  //   name: data.name,
+  //   link: data.link
+  // }
+  // data.name = profilePopupInputName.value;
+  // data.link = profilePopupInputActivity.value;
+  // console.log()
+  // userInfo.setUserInfo(data);
+// }
 
 
 // ProfilePopup
 const profilePopupWithForm = new PopupWithForm(profilePopupContainer, handleProfileFormSubmit);
-// profilePopupWithForm.setEventListeners();
-// const profilePopup = new Popup(profilePopupContainer);
+profilePopupWithForm.setEventListeners();
+const profilePopup = new Popup(profilePopupContainer);
 profileEditBtn.addEventListener('click', function () {
-  profilePopupInputName.value = profileName.textContent;
-  profilePopupInputActivity.value = profileActivity.textContent;
-  profilePopupWithForm.open();
+
+  // openProfilePopup(rumba);
+  userInfo.setUserInfo(userInfo.getUserInfo());
+
+  // profilePopupInputName.value = profileName.textContent;
+  // profilePopupInputActivity.value = profileActivity.textContent;
+
+  // openProfilePopup(rumba)
+
+  profilePopup.open();
+  // userInfo.setUserInfo();
+
 });
+
+
+
 // profilePopup.setEventListeners();
 // profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
 function handleProfileFormSubmit() {
+
+  // data = {
+  //   name: profileName.textContent,
+  //   link: profileActivity.textContent
+  // }
+  // userInfo.setUserInfo(data);
+
   // event.preventDefault();
 
   profileName.textContent = profilePopupInputName.value;
   profileActivity.textContent = profilePopupInputActivity.value;
-  profilePopupWithForm.close();
+  // profilePopupWithForm.close();
 };
 
 // function openProfilePopup() {
@@ -199,34 +247,19 @@ function handleProfileFormSubmit() {
 // profileEditBtn.addEventListener('click', function () {
 //   openProfilePopup();
 // });
-
-
-
-
-
-
 // profilePopupCloseBtn.addEventListener('click', function () {
 //   profilePopup.close();
 // });
-
-
-
 // profilePopupCloseBtn.addEventListener('click', function () {
 //   closePopup(profilePopupContainer);
 // });
-
-
-
 // const cardData123 = {
 //   name: 'Карачаево-Черкессия',
 //   link: './image/kirill-pershin-1088404-unsplash.png'
 // };
-
 // handleCardClick(cardData123);
-
 // const imagePopup = new PopupWithImage(imagePopupContainer, data);
 // imagePopup.open();
-
 // imagePopupCloseBtn.addEventListener('click', function () {
 //   closePopup(imagePopupContainer);
 // });
@@ -243,6 +276,17 @@ function handleProfileFormSubmit() {
 // closePopupEscBtn(cardPopupElement);
 // closePopupEscBtn(imagePopupContainer);
 // closePopupEscBtn(profilePopupContainer);
+
+
+
+// UserInfo
+// const userInfo = new UserInfo( {profileName, profileActivity} );
+
+
+
+
+
+
 
 const popupData = {
   input: '.popup__form-input',
