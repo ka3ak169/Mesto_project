@@ -27,39 +27,50 @@ const profilePopupInputName = profilePopupContainer.querySelector(
 const profilePopupInputActivity = profilePopupContainer.querySelector(
   ".profile-popup-activity"
 );
-const profileName = document.querySelector(".profile__name");
-const profileActivity = document.querySelector(".profile__activity");
+const profileName = ".profile__name";
+const profileActivity = ".profile__activity";
 // const page = document.querySelector('.page');
 const cardPopupAddBtn = document.querySelector(".profile__add-button");
 const cardPopupElement = document.querySelector(cardPopupSelector);
-const cardPopupInputPlace = cardPopupElement.querySelector(".card-popup-name");
-const cardPopupInputLink = cardPopupElement.querySelector(
-  ".card-popup-activity"
-);
+// const cardPopupInputPlace = cardPopupElement.querySelector(".card-popup-name");
+// const cardPopupInputLink = cardPopupElement.querySelector(
+//   ".card-popup-activity"
+// );
 const cardPopupFrom = cardPopupElement.querySelector(".card-popup__form");
 
-const popupWithImage = new PopupWithImage(imagePopupSelector);
 
 // image Popup
+const popupWithImage = new PopupWithImage(imagePopupSelector);
 const imagePopup = new Popup(imagePopupSelector);
 imagePopup.setEventListeners();
 
-const renderer = function (item) {
+// const sechasData = [
+//   {
+//     name: 'Карачаево-Черкессия',
+//     link: 'https://st1.zr.ru/_ah/img/W-A2vJn6Yemm5IjHIIBFJA=s800'
+//   }];
+
+// Section
+const cardsSection = new Section( { renderer }, cardsContainer);
+cardsSection.renderItem(cardsData);
+// cardsSection.renderItem(sechasData);
+
+
+function createCard(item) {
   const card = new Card(item, cardTemplate, () => {
     popupWithImage.open(item);
   });
   const cardElement = card.generateCard();
-  defaultCardList.addItem(cardElement);
+  return cardElement;
 };
 
-const defaultCardList = new Section(
-  { items: cardsData, renderer },
-  cardsContainer
-);
+function renderCard(card) {
+    cardsSection.addItem(card);
+};
 
-defaultCardList.renderItem();
-
-
+function renderer(item) {
+  renderCard(createCard(item));
+};
 
 // card Popup
 const cardPopupWithForm = new PopupWithForm(cardPopupSelector, handleAddCardFormSubmit);
@@ -71,18 +82,12 @@ cardPopupAddBtn.addEventListener("click", function () {
 });
 
 function handleAddCardFormSubmit(data) {
-  data = {
-    name: cardPopupInputPlace.value,
-    link: cardPopupInputLink.value,
-  };
-
   renderer(data);
-
   cardPopupValiadator.disableSubmitButton();
 }
 
 // UserInfo
-const userInfo = new UserInfo({ name: profileName, activity: profileActivity });
+const userInfo = new UserInfo({ name: profileName,  activity: profileActivity });
 
 // ProfilePopup
 const profilePopupWithForm = new PopupWithForm(profilePopupSelector, handleProfileFormSubmit);
@@ -97,7 +102,7 @@ profileEditBtn.addEventListener("click", function () {
 });
 
 function handleProfileFormSubmit() {
-  userInfo.setUserInfo(userInfo.getUserInfo());
+  userInfo.setUserInfo(profilePopupWithForm._getInputValues());
 }
 // form Validation
 const cardPopupValiadator = new FormValidator(popupData, cardPopupFrom);
