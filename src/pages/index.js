@@ -5,7 +5,7 @@ import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import './index.css';
+import "./index.css";
 import {
   cardTemplate,
   cardsContainer,
@@ -32,29 +32,16 @@ const profileActivity = ".profile__activity";
 // const page = document.querySelector('.page');
 const cardPopupAddBtn = document.querySelector(".profile__add-button");
 const cardPopupElement = document.querySelector(cardPopupSelector);
-// const cardPopupInputPlace = cardPopupElement.querySelector(".card-popup-name");
-// const cardPopupInputLink = cardPopupElement.querySelector(
-//   ".card-popup-activity"
-// );
 const cardPopupFrom = cardPopupElement.querySelector(".card-popup__form");
-
 
 // image Popup
 const popupWithImage = new PopupWithImage(imagePopupSelector);
 const imagePopup = new Popup(imagePopupSelector);
 imagePopup.setEventListeners();
 
-// const sechasData = [
-//   {
-//     name: 'Карачаево-Черкессия',
-//     link: 'https://st1.zr.ru/_ah/img/W-A2vJn6Yemm5IjHIIBFJA=s800'
-//   }];
-
 // Section
-const cardsSection = new Section( { renderer }, cardsContainer);
+const cardsSection = new Section({ renderer }, cardsContainer);
 cardsSection.renderItem(cardsData);
-// cardsSection.renderItem(sechasData);
-
 
 function createCard(item) {
   const card = new Card(item, cardTemplate, () => {
@@ -62,18 +49,21 @@ function createCard(item) {
   });
   const cardElement = card.generateCard();
   return cardElement;
-};
+}
 
 function renderCard(card) {
-    cardsSection.addItem(card);
-};
+  cardsSection.addItem(card);
+}
 
 function renderer(item) {
   renderCard(createCard(item));
-};
+}
 
 // card Popup
-const cardPopupWithForm = new PopupWithForm(cardPopupSelector, handleAddCardFormSubmit);
+const cardPopupWithForm = new PopupWithForm(
+  cardPopupSelector,
+  handleAddCardFormSubmit
+);
 cardPopupWithForm.setEventListeners();
 const cardPopup = new Popup(cardPopupSelector);
 cardPopup.setEventListeners();
@@ -87,10 +77,13 @@ function handleAddCardFormSubmit(data) {
 }
 
 // UserInfo
-const userInfo = new UserInfo({ name: profileName,  activity: profileActivity });
+const userInfo = new UserInfo({ name: profileName, activity: profileActivity });
 
 // ProfilePopup
-const profilePopupWithForm = new PopupWithForm(profilePopupSelector, handleProfileFormSubmit);
+const profilePopupWithForm = new PopupWithForm(
+  profilePopupSelector,
+  handleProfileFormSubmit
+);
 profilePopupWithForm.setEventListeners();
 const profilePopup = new Popup(profilePopupSelector);
 profilePopup.setEventListeners();
@@ -107,7 +100,9 @@ function handleProfileFormSubmit() {
 // form Validation
 const cardPopupValiadator = new FormValidator(popupData, cardPopupFrom);
 const profilePopupValiadator = new FormValidator(popupData, profilePopupForm);
-profilePopupForm.addEventListener('click', () => { profilePopupValiadator.enableValidation(); });
-cardPopupFrom.addEventListener('click', () => { cardPopupValiadator.enableValidation(); });
-
-
+profilePopupForm.addEventListener("click", () => {
+  profilePopupValiadator.enableValidation();
+});
+cardPopupFrom.addEventListener("click", () => {
+  cardPopupValiadator.enableValidation();
+});
