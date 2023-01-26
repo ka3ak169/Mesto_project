@@ -34,17 +34,18 @@ export default class FormValidator {
       });
     });
   };
+
   // объединяет input
   _hasInvalidInput(inputList) {
     return inputList.some((input) => {
       return !input.validity.valid;
     });
   };
+
   // Переключаем кнопку
   _setSubmitButtonState(inputList) {
     if (this._hasInvalidInput(inputList)) {
-      this._submitBtn.setAttribute("disabled", true);
-      this._submitBtn.classList.add(this._submitBtnInvalid);
+      this.disableSubmitButton();
     } else {
       this._submitBtn.removeAttribute("disabled");
       this._submitBtn.classList.remove(this._submitBtnInvalid);
