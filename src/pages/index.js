@@ -36,8 +36,8 @@ const cardPopupFrom = cardPopupElement.querySelector(".card-popup__form");
 
 // image Popup
 const popupWithImage = new PopupWithImage(imagePopupSelector);
-const imagePopup = new Popup(imagePopupSelector);
-imagePopup.setEventListeners();
+// const imagePopup = new Popup(imagePopupSelector);
+popupWithImage.setEventListeners();
 
 // Section
 const cardsSection = new Section({ renderer }, cardsContainer);
@@ -65,10 +65,8 @@ const cardPopupWithForm = new PopupWithForm(
   handleAddCardFormSubmit
 );
 cardPopupWithForm.setEventListeners();
-const cardPopup = new Popup(cardPopupSelector);
-cardPopup.setEventListeners();
 cardPopupAddBtn.addEventListener("click", function () {
-  cardPopup.open();
+  cardPopupWithForm.open();
 });
 
 function handleAddCardFormSubmit(data) {
@@ -85,17 +83,15 @@ const profilePopupWithForm = new PopupWithForm(
   handleProfileFormSubmit
 );
 profilePopupWithForm.setEventListeners();
-const profilePopup = new Popup(profilePopupSelector);
-profilePopup.setEventListeners();
 profileEditBtn.addEventListener("click", function () {
   const data = userInfo.getUserInfo();
   profilePopupInputName.value = data.name;
   profilePopupInputActivity.value = data.link;
-  profilePopup.open();
+  profilePopupWithForm.open();
 });
 
-function handleProfileFormSubmit() {
-  userInfo.setUserInfo(profilePopupWithForm._getInputValues());
+function handleProfileFormSubmit(data) {
+  userInfo.setUserInfo(data);
 }
 // form Validation
 const cardPopupValiadator = new FormValidator(popupData, cardPopupFrom);
