@@ -9,6 +9,8 @@ export const cardTemplate = '.card-template';
 export const cardPopupSelector = '.card-popup';
 export const profilePopupSelector = '.profile-popup';
 export const imagePopupSelector = '.image-popup';
+export const deletePopupSelector = '.deleteCard-popup';
+
 export const cardsContainer = document.querySelector('.cards');
 export const cardsData = [
   {

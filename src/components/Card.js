@@ -1,15 +1,17 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, openDeletePopup) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._openDeletePopup = openDeletePopup;
     this._cardTemplate = document.querySelector(this._templateSelector).content.querySelector('.card__element').cloneNode(true);
     this._image = this._cardTemplate.querySelector('.card__image');
     this._place = this._cardTemplate.querySelector('.card__place');
     this._like = this._cardTemplate.querySelector('.card__like');
     this._trash = this._cardTemplate.querySelector('.card__trash');
-
+ 
+    console.log(this._openDeletePopup);
   };
 
   _getTemplate () {
@@ -27,15 +29,26 @@ export default class Card {
 
   _cardTrash = () => {
     this._cardElement.remove();
-    this._cardElement = null;
+    // this._cardElement = null;
   };
 
   _cardLike = () => {
     this._like.classList.toggle('card__like_active');
   };
 
+  _listener = () => {
+    this._openDeletePopup();
+    // console.log(this);
+    const submitBtn = document.querySelector('.submit-button123');
+    submitBtn.addEventListener('click', this._cardTrash);
+  }
+
+  getElement() {
+    return this.generateCard()
+  }
+
   _setEventListeners() {
-    this._trash.addEventListener('click', this._cardTrash);
+    this._trash.addEventListener('click', this._listener);
     this._like.addEventListener('click', this._cardLike);
     this._image.addEventListener('click', this._handleCardClick);
   };
