@@ -13,7 +13,11 @@
   <main class="content">
     <section class="profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="<%=require('./image/жак.png')%>" alt="Жак-Ив Кусто">
+        <div class="profile__avatar-container">
+          <img class="profile__avatar" src="<%=require('./image/жак.png')%>" alt="Жак-Ив Кусто">
+          <div class="profile__pen"></div>
+          <div class="profile__overlay"></div>
+        </div>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__activity">Исследователь океана</p>
@@ -31,11 +35,11 @@
   <!-- profile popup -->
   <!-- <div class="popup profile-popup popup_opened"> -->
   <div class="popup profile-popup">
-    <div class="profile-popup__container">
-      <h2 class="profile-popup__heading">Редактировать профиль</h2>
-      <button class="profile-popup__close-button popup__close-button" name="close" type="button"></button>
+    <div class="profile-popup__container popup__container">
+      <h2 class="popup__heading">Редактировать профиль</h2>
+      <button class="popup__close-button" name="close" type="button"></button>
       <form class="profile-popup__form popup__form" name="formProfile" novalidate>
-        <fieldset class="profile-popup__field">
+        <fieldset class="popup__field">
           <input class="popup__form-input profile-popup-name" id="profile-name-input" type="text" name="name" value=""
             placeholder="Имя" minlength="2" maxlength="40" required>
           <span class="error profile-name-input-error"></span>
@@ -50,11 +54,11 @@
   <!-- card popup -->
   <!-- <div class="popup card-popup popup_opened"> -->
   <div class="popup card-popup">
-    <div class="card-popup__container">
-      <h2 class="card-popup__heading">Новое место</h2>
-      <button class="card-popup__close-button popup__close-button" name="close" type="button"></button>
+    <div class="popup__container card-popup__container">
+      <h2 class="popup__heading">Новое место</h2>
+      <button class="popup__close-button" name="close" type="button"></button>
       <form class="card-popup__form popup__form" novalidate>
-        <fieldset class="card-popup__field">
+        <fieldset class="popup__field">
           <input type="text" class="popup__form-input card-popup-name" id="card-name-input" name="name" value=""
             placeholder="Название" minlength="2" maxlength="30" required>
           <span class="error card-name-input-error"></span>
@@ -63,6 +67,33 @@
           <span class="error card-activity-input-error"></span>
         </fieldset>
         <button class="submit-button submit-button_invalid" type="submit" name="card-submit">Создать</button>
+      </form>
+    </div>
+  </div>
+  <!-- delete-card popup -->
+  <!-- <div class="popup deleteCard-popup popup_opened"> -->
+    <div class="popup deleteCard-popup">
+      <div class="popup__container deleteCard-popup__container">
+        <h2 class="popup__heading">Вы уверены?</h2>
+        <button class="deleteCard-popup__close-button popup__close-button" name="close" type="button"></button>
+        <form class="deleteCard-popup__form popup__form" name="formDelete" novalidate>
+          <button class="submit-button" type="submit" name="delete-submit">Да</button>
+        </form>
+      </div>
+    </div>
+  <!-- avatar popup -->
+  <!-- <div class="popup avatar-popup popup_opened"> -->
+  <div class="popup avatar-popup">
+    <div class="avatar-popup__container popup__container">
+      <h2 class="popup__heading">Обновить аватар</h2>
+      <button class="popup__close-button" name="close" type="button"></button>
+      <form class="avatar-popup__form popup__form" name="formAvatar" novalidate>
+        <fieldset class="popup__field avatar-popup__field">
+          <input type="url" class="popup__form-input" id="avatar-popup-input" name="link"
+            value="" placeholder="Ссылка на картинку" required>
+          <span class="error avatar-popup-input-error"></span>
+        </fieldset>
+        <button class="submit-button" type="submit" name="profile-submit">Сохранть</button>
       </form>
     </div>
   </div>
@@ -81,7 +112,10 @@
       <img class="card__image" alt="" src="#">
       <div class="card__group">
         <h2 class="card__place"></h2>
-        <button class="card__like" type="button"></button>
+        <div class="card__like-box">
+          <button class="card__like" type="button"></button>
+          <p class="card__like-counter">999999999</p>
+        </div>
       </div>
       <button class="card__trash" type="button"></button>
     </div>

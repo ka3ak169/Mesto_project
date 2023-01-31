@@ -16,23 +16,23 @@ export const cardsData = [
     link: kirillPershin,
   },
   {
-    name: 'Милая кошечка Агата',
+    name: 'Кошечка Агата',
     link: agata,
   },
   {
-    name: 'Милый котик Барсик',
+    name: 'Котик Барсик',
     link: barsik,
   },
   {
-    name: 'Милый котик Борис',
+    name: 'Котик Борис',
     link: boris,
   },
   {
-    name: 'Милый котик Рыжик',
+    name: 'Котик Рыжик',
     link: rizhik,
   },
   {
-    name: 'Милый котик Тимоша',
+    name: 'Котик Тимоша',
     link: timosha,
   },
 ];

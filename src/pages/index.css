@@ -8,9 +8,19 @@
 /* block header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
+/* popup */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__close-button/popupp__close-button.css);
+@import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__field/popup__field.css);
 /* блок profile */
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__activity/profile__activity.css);
+@import url(../blocks/profile/__avatar-container/profile__avatar-container.css);
+@import url(../blocks/profile/__overlay/profile__overlay.css);
+@import url(../blocks/profile/__pen/profile__pen.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__container/profile__container.css);
@@ -26,6 +36,8 @@
 @import url(../blocks/card/__place/card__place.css);
 @import url(../blocks/card/__trash/card__trash.css);
 @import url(../blocks/card/__like/_active/card__like_active.css);
+@import url(../blocks/card/__like-box/card__like-box.css);
+@import url(../blocks/card/__like-counter/card__like-counter.css);
 /* блок footer */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__autograph/footer__autograph.css);
@@ -47,15 +59,8 @@
 @import url(../blocks/card-popup/__container/card-popup__container.css);
 @import url(../blocks/card-popup/__field/card-popup__field.css);
 @import url(../blocks/card-popup/__heading/card-popup__heading.css);
-
-@import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/__close-button/popupp__close-button.css);
-
-
-
-
-
-
-
-
+/* delete popup */
+@import url(../blocks/deleteCard-popup/__container/deleteCard-popup__container.css);
+/* avatar popup */
+@import url(../blocks/avatar-popup/__container/avatar-popup__container.css);
+@import url(../blocks/avatar-popup/__field/avatar-popup__field.css);
