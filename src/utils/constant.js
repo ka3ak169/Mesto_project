@@ -44,3 +44,11 @@ export const popupData = {
   submitBtn: '.submit-button',
   submitBtnInvalid: 'submit-button_invalid',
 };
+
+export const configApi = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-58/',
+  headers: {
+    'Content-Type': 'application/json',
+    authorization: 'babe0c92-1b62-46ea-b207-046cc0a5214b'
+  }
+};

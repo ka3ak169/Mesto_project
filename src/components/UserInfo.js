@@ -7,12 +7,12 @@ export default class Userinfo {
   getUserInfo() {
     return {
       name: this._name.textContent,
-      link: this._activity.textContent
+      about: this._activity.textContent
     }
   }
   
   setUserInfo(data) {
     this._name.textContent = data.name;
-    this._activity.textContent = data.link;
+    this._activity.textContent = data.about;
   }
 }

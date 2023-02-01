@@ -16,6 +16,7 @@ import {
   profilePopupSelector,
   imagePopupSelector,
   deletePopupSelector,
+  configApi,
 } from "../utils/constant.js";
 
 const profilePopupContainer = document.querySelector(profilePopupSelector);
@@ -36,32 +37,39 @@ const cardPopupAddBtn = document.querySelector(".profile__add-button");
 const cardPopupElement = document.querySelector(cardPopupSelector);
 const cardPopupFrom = cardPopupElement.querySelector(".card-popup__form");
 
+// Api
+const api = new Api(configApi);
+
+
 // image Popup
 const popupWithImage = new PopupWithImage(imagePopupSelector);
 popupWithImage.setEventListeners();
 
 // Section
 const cardsSection = new Section({ renderer }, cardsContainer);
-cardsSection.renderItem(cardsData);
+// Initial Cards
+api.getInitialCards().then((data) => {
+  cardsSection.renderItem(data)
+});
+
+// delete-card popup
+const popupWithConfirmation = new PopupWithConfirmation(deletePopupSelector);
+
+function handleDelete(item) {
+  popupWithConfirmation.open();  
+}
 
 function createCard(item) {
   const card = new Card(
     item,
     cardTemplate,
     () => {popupWithImage.open(item);},
-    () => {popupWithConfirmation.open()} );
+    () => {handleDelete(item)} );
+
+  popupWithConfirmation.setEventListeners();
   const cardElement = card.generateCard();
   return cardElement;
 }
-
-// delete-card popup
-const popupWithConfirmation = new PopupWithConfirmation(deletePopupSelector, () => {handleSubmit});
-popupWithConfirmation.setEventListeners();
-popupWithConfirmation.handleSubmit();
-// function handleBascket(obj) {
-//   popupWithConfirmation.open();
-//   popupWithConfirmation.getid(obj)
-// }
 
 function renderCard(card) {
   cardsSection.addItem(card);
@@ -82,7 +90,8 @@ cardPopupAddBtn.addEventListener("click", function () {
 });
 
 function handleAddCardFormSubmit(data) {
-  renderer(data);
+  api.addCard(data)
+  .then((data) => { renderer(data) });  
   cardPopupValiadator.disableSubmitButton();
 }
 
@@ -95,19 +104,20 @@ const profilePopupWithForm = new PopupWithForm(
   handleProfileFormSubmit
 );
 profilePopupWithForm.setEventListeners();
-profileEditBtn.addEventListener("click", function () {
-  const data = userInfo.getUserInfo();
-  profilePopupInputName.value = data.name;
-  profilePopupInputActivity.value = data.link;
-  profilePopupWithForm.open();
+// User information
+api.getUserInformation().then((data) => {
+  userInfo.setUserInfo(data);
+  profileEditBtn.addEventListener('click', () => {
+    profilePopupWithForm.open();
+    profilePopupInputName.value = data.name;
+    profilePopupInputActivity.value = data.about;
+  })
 });
 
 function handleProfileFormSubmit(data) {
+  api.changeUserInformation(data);
   userInfo.setUserInfo(data);
 }
-
-
-// avatar popup
 
 
 // form Validation

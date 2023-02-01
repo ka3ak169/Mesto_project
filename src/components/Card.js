@@ -10,8 +10,8 @@ export default class Card {
     this._place = this._cardTemplate.querySelector('.card__place');
     this._like = this._cardTemplate.querySelector('.card__like');
     this._trash = this._cardTemplate.querySelector('.card__trash');
- 
-    console.log(this._openDeletePopup);
+    console.log(openDeletePopup);
+    console.log(this);
   };
 
   _getTemplate () {
@@ -29,26 +29,23 @@ export default class Card {
 
   _cardTrash = () => {
     this._cardElement.remove();
-    // this._cardElement = null;
+    this._cardElement = null;
   };
 
   _cardLike = () => {
     this._like.classList.toggle('card__like_active');
   };
 
-  _listener = () => {
-    this._openDeletePopup();
-    // console.log(this);
-    const submitBtn = document.querySelector('.submit-button123');
-    submitBtn.addEventListener('click', this._cardTrash);
-  }
-
-  getElement() {
+   getElement() {
     return this.generateCard()
   }
 
+  deleteCard() {
+
+  }
+
   _setEventListeners() {
-    this._trash.addEventListener('click', this._listener);
+    this._trash.addEventListener('click', this._openDeletePopup);
     this._like.addEventListener('click', this._cardLike);
     this._image.addEventListener('click', this._handleCardClick);
   };
