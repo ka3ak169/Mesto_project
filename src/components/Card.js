@@ -10,8 +10,6 @@ export default class Card {
     this._place = this._cardTemplate.querySelector('.card__place');
     this._like = this._cardTemplate.querySelector('.card__like');
     this._trash = this._cardTemplate.querySelector('.card__trash');
-    console.log(openDeletePopup);
-    console.log(this);
   };
 
   _getTemplate () {
@@ -27,9 +25,8 @@ export default class Card {
     return this._cardElement;
   };
 
-  _cardTrash = () => {
+  deleteCard = () => {
     this._cardElement.remove();
-    this._cardElement = null;
   };
 
   _cardLike = () => {
@@ -38,10 +35,6 @@ export default class Card {
 
    getElement() {
     return this.generateCard()
-  }
-
-  deleteCard() {
-
   }
 
   _setEventListeners() {

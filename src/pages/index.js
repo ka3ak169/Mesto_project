@@ -55,16 +55,17 @@ api.getInitialCards().then((data) => {
 // delete-card popup
 const popupWithConfirmation = new PopupWithConfirmation(deletePopupSelector);
 
-function handleDelete(item) {
-  popupWithConfirmation.open();  
-}
-
 function createCard(item) {
   const card = new Card(
     item,
     cardTemplate,
-    () => {popupWithImage.open(item);},
+    () => {popupWithImage.open(item)},
     () => {handleDelete(item)} );
+
+  function handleDelete() {
+    popupWithConfirmation.open();
+    popupWithConfirmation.setSubmitHandler(() => card.deleteCard())
+  } 
 
   popupWithConfirmation.setEventListeners();
   const cardElement = card.generateCard();
