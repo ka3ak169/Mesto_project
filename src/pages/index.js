@@ -59,8 +59,8 @@ function createCard(item) {
   const card = new Card(
     item,
     cardTemplate,
-    () => {popupWithImage.open(item)},
-    () => {handleDelete(item)} );
+    () => { popupWithImage.open(item) },
+    () => { handleDelete()} );
 
   function handleDelete() {
     popupWithConfirmation.open();
