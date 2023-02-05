@@ -10,6 +10,8 @@ export default class Card {
     this._place = this._cardTemplate.querySelector('.card__place');
     this._like = this._cardTemplate.querySelector('.card__like');
     this._trash = this._cardTemplate.querySelector('.card__trash');
+    this._counter = this._cardTemplate.querySelector('.card__like-counter');
+    // console.log(this);
   };
 
   _getTemplate () {
@@ -22,6 +24,7 @@ export default class Card {
     this._image.alt = this._name;
     this._place.textContent = this._name;
     this._setEventListeners();
+    // console.log(this);
     return this._cardElement;
   };
 
@@ -33,8 +36,16 @@ export default class Card {
     this._like.classList.toggle('card__like_active');
   };
 
-   getElement() {
+  getElement() {
     return this.generateCard()
+  }
+
+  getNumberLike(number) {
+    this._counter.textContent = number;
+  }
+
+  deleteTrash() {
+    this._trash.remove();
   }
 
   _setEventListeners() {
