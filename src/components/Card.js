@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick, openDeletePopup) {
+  constructor(data, templateSelector, handleCardClick, openDeletePopup, userId, itemId) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -11,7 +11,9 @@ export default class Card {
     this._like = this._cardTemplate.querySelector('.card__like');
     this._trash = this._cardTemplate.querySelector('.card__trash');
     this._counter = this._cardTemplate.querySelector('.card__like-counter');
-    // console.log(this);
+    this._userId = userId;
+    this._itemId = itemId;
+    // console.log(this._userId);
   };
 
   _getTemplate () {
@@ -30,6 +32,14 @@ export default class Card {
 
   deleteCard = () => {
     this._cardElement.remove();
+    this._cardElement = null;
+    console.log(this);
+
+    return
+    // console.log(this._cardElement);
+    // console.log(this._userId);
+    // console.log(this._itemId);
+
   };
 
   _cardLike = () => {
@@ -42,6 +52,10 @@ export default class Card {
 
   getNumberLike(number) {
     this._counter.textContent = number;
+  }
+
+  getUserId() {
+    return this._userId
   }
 
   deleteTrash() {

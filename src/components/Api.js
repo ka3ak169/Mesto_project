@@ -55,4 +55,18 @@ export default class Api {
     })
     .catch((error) => {console.log(error);})
   }
+
+  deleteCard(idCard) {
+    return fetch(`${this._url}${idCard}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((response) => {
+      if (response.ok) {
+      return response.json()
+      }
+      return Promise.reject(new Error('Какая-то ошибка!'))
+    })
+    .catch((error) => {console.log(error);})
+  }
 }
