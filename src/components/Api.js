@@ -1,7 +1,14 @@
+import {
+  avatarSbmBtn,
+  profileSbmBtn,
+  cardSbmBtn
+} from "../utils/constant.js"
+
 export default class Api {
-  constructor({ url, headers}) {
+  constructor({ url, headers }, renderLoading ) {
     this._url = url;
     this._headers = headers;
+    this._renderLoading = renderLoading;
   }
 
   getUserInformation() {
@@ -39,6 +46,9 @@ export default class Api {
         about: data.about
       })
     })
+    .finally(() => {
+      this._renderLoading(false, 'Сохранить', profileSbmBtn)
+    })
   }
 
   addCard(data) {
@@ -53,7 +63,11 @@ export default class Api {
       }
       return Promise.reject(new Error('Какая-то ошибка!'))
     })
-    .catch((error) => {console.log(error);})
+    .catch((error) => {console.log(error);
+    })
+    .finally(() => {
+      this._renderLoading(false, 'Создать', cardSbmBtn)
+    })
   }
 
   deleteCard(idCard) {
@@ -105,6 +119,9 @@ export default class Api {
       body: JSON.stringify({
         avatar: link        
       })
+    })
+    .finally(() => {
+      this._renderLoading(false, 'Сохранить', avatarSbmBtn)
     })
   }
 }
