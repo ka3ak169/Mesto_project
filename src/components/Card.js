@@ -15,8 +15,7 @@ export default class Card {
     this._userId = userId;
     this._addLike = addLike;
     this._deleteLike = deleteLike;
-
-
+    console.log(this._data);
   };
 
   _getTemplate () {
@@ -42,22 +41,20 @@ export default class Card {
 
   _cardLike = () => {
     if(this._like.classList.contains('card__like_active')) {
-      this._deleteClassLike()
+      this.deleteClassLike()
     } else {
-      this._addClassLike()
+      this.addClassLike()
     }
   };
 
-  _addClassLike() {
-    this._like.classList.add('card__like_active');
-    this._counter.textContent = this._number+1;
+  addClassLike() {
     this._addLike(this._data._id);
+    this._like.classList.add('card__like_active');
   }
 
-  _deleteClassLike() {
-    this._like.classList.remove('card__like_active');
-    this._counter.textContent = this._number;
+  deleteClassLike() {
     this._deleteLike(this._data._id);
+    this._like.classList.remove('card__like_active');   
   }
 
   getElement() {
@@ -66,7 +63,6 @@ export default class Card {
 
   getNumberLike(number) {
     this._counter.textContent = number;
-    this._number = number;
   }
 
   getUserId() {

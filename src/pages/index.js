@@ -100,16 +100,20 @@ function createCard(item) {
     })
   };
 
+  function addLike(itemId) {
+    api.addLike(itemId).then((data) => {
+      card.getNumberLike(data.likes.length);
+    });
+  }
+
+  function deleteLike(itemId) {
+    api.deleteLike(itemId).then((data) => {
+      card.getNumberLike(data.likes.length);
+    });
+  }
+
   const cardElement = card.generateCard();
   return cardElement;
-}
-
-function addLike(itemId) {
-  api.addLike(itemId);
-}
-
-function deleteLike(itemId) {
-  api.deleteLike(itemId);
 }
 
 function renderCard(card) {
