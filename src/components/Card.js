@@ -15,7 +15,6 @@ export default class Card {
     this._userId = userId;
     this._addLike = addLike;
     this._deleteLike = deleteLike;
-    console.log(this._data);
   };
 
   _getTemplate () {

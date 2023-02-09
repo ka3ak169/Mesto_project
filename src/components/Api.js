@@ -97,4 +97,14 @@ export default class Api {
     })
     .catch((error) => {console.log(error);})
   }
+
+  changeProfileAvatar(link) {
+    return fetch(`${this._url}users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link        
+      })
+    })
+  }
 }

@@ -10,10 +10,10 @@ import "./index.css";
 import {
   cardTemplate,
   cardsContainer,
-  cardsData,
   popupData,
   cardPopupSelector,
   profilePopupSelector,
+  avatarPopupSelector,
   imagePopupSelector,
   deletePopupSelector,
   configApi,
@@ -33,6 +33,8 @@ const profilePopupInputActivity = profilePopupContainer.querySelector(
 );
 const profileName = ".profile__name";
 const profileActivity = ".profile__activity";
+const profileAvatar = document.querySelector(".profile__avatar");
+const avatarPen = document.querySelector(".profile__pen");
 // const page = document.querySelector('.page');
 const cardPopupAddBtn = document.querySelector(".profile__add-button");
 const cardPopupElement = document.querySelector(cardPopupSelector);
@@ -53,13 +55,8 @@ let userId;
 // User information
 api.getUserInformation().then((data) => {
   userId = data._id;
-
+  profileAvatar.src = data.avatar;
   userInfo.setUserInfo(data);
-  profileEditBtn.addEventListener('click', () => {
-    profilePopupWithForm.open();
-    profilePopupInputName.value = data.name;
-    profilePopupInputActivity.value = data.about;
-  })
 });
 
 // Initial Cards
@@ -150,7 +147,32 @@ profilePopupWithForm.setEventListeners();
 
 function handleProfileFormSubmit(data) {
   api.changeUserInformation(data);
-  userInfo.setUserInfo(data);
+  userInfo.setUserInfo(data); 
+}
+
+profileEditBtn.addEventListener('click', () => {
+  api.getUserInformation().then((data) => {
+    userInfo.setUserInfo(data);
+    profilePopupWithForm.open();
+    profilePopupInputName.value = data.name;
+    profilePopupInputActivity.value = data.about;
+  });
+})
+
+// avatar Popup
+const avayarPopupWithForm = new PopupWithForm(
+  avatarPopupSelector,
+  handleAvatarFormSubmit
+);
+avayarPopupWithForm.setEventListeners();
+avatarPen.addEventListener("click", function () {
+  avayarPopupWithForm.open();
+});
+
+function handleAvatarFormSubmit(data) {
+  profileAvatar.src = data.link;
+  api.changeProfileAvatar(data.link);
+
 }
 
 // form Validation
