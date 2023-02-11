@@ -57,16 +57,22 @@ export default class Card {
     } else {
       this.addClassLike();
     }
-  };
+  }
 
   addClassLike() {
     this._addLike(this._data._id);
-    this._like.classList.add("card__like_active");
   }
 
   deleteClassLike() {
     this._deleteLike(this._data._id);
-    this._like.classList.remove("card__like_active");
+  }
+
+  changeColorLike() {
+    if (this._like.classList.contains("card__like_active")) {
+      this._like.classList.remove("card__like_active");
+    } else {
+      this._like.classList.add("card__like_active");
+    }
   }
 
   getElement() {
@@ -92,7 +98,7 @@ export default class Card {
 
   _setEventListeners() {
     this._trash.addEventListener("click", () => {
-      this._handleSubmitDeletePopup(this._cardElement);
+    this._handleSubmitDeletePopup(this._cardElement);
     });
     this._like.addEventListener("click", this._cardLike);
     this._image.addEventListener("click", this._handleCardClick);

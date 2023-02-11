@@ -1,40 +1,28 @@
-import {
-  avatarSbmBtn,
-  profileSbmBtn,
-  cardSbmBtn
-} from "../utils/constant.js"
-
 export default class Api {
-  constructor({ url, headers }, renderLoading ) {
+  constructor({ url, headers }) {
     this._url = url;
     this._headers = headers;
-    this._renderLoading = renderLoading;
+  }
+
+  _checkResponse(response) {
+    if (response.ok) {
+      return response.json()
+      }
+      return Promise.reject(new Error('Какая-то ошибка!'))
   }
 
   getUserInformation() {
     return fetch(`${this._url}users/me`, {
       headers: this._headers
     })
-    .then((response) => {
-      if (response.ok) {
-      return response.json()
-      }
-      return Promise.reject(new Error('Какая-то ошибка!'))
-    })
-    .catch((error) => {console.log(error);})
+    .then(this._checkResponse)
   }
 
   getInitialCards() {
     return fetch(`${this._url}cards`, {
       headers: this._headers
     })
-    .then((response) => {
-      if (response.ok) {
-      return response.json()
-      }
-      return Promise.reject(new Error('Какая-то ошибка!'))
-    })
-    .catch((error) => {console.log(error);})
+    .then(this._checkResponse)
   }
 
   changeUserInformation(data) {
@@ -46,9 +34,7 @@ export default class Api {
         about: data.about
       })
     })
-    .finally(() => {
-      this._renderLoading(false, 'Сохранить', profileSbmBtn)
-    })
+    .then(this._checkResponse)
   }
 
   addCard(data) {
@@ -57,17 +43,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then((response) => {
-      if (response.ok) {
-      return response.json()
-      }
-      return Promise.reject(new Error('Какая-то ошибка!'))
-    })
-    .catch((error) => {console.log(error);
-    })
-    .finally(() => {
-      this._renderLoading(false, 'Создать', cardSbmBtn)
-    })
+    .then(this._checkResponse)
   }
 
   deleteCard(idCard) {
@@ -75,13 +51,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then((response) => {
-      if (response.ok) {
-      return response.json()
-      }
-      return Promise.reject(new Error('Какая-то ошибка!'))
-    })
-    .catch((error) => {console.log(error);})
+    .then(this._checkResponse)
   }
 
   addLike(idCard) {
@@ -89,13 +59,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then((response) => {
-      if (response.ok) {
-      return response.json()
-      }
-      return Promise.reject(new Error('Какая-то ошибка!'))
-    })
-    .catch((error) => {console.log(error);})
+    .then(this._checkResponse)
   }
 
   deleteLike(idCard) {
@@ -103,13 +67,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then((response) => {
-      if (response.ok) {
-      return response.json()
-      }
-      return Promise.reject(new Error('Какая-то ошибка!'))
-    })
-    .catch((error) => {console.log(error);})
+    .then(this._checkResponse)
   }
 
   changeProfileAvatar(link) {
@@ -120,8 +78,6 @@ export default class Api {
         avatar: link        
       })
     })
-    .finally(() => {
-      this._renderLoading(false, 'Сохранить', avatarSbmBtn)
-    })
+    .then(this._checkResponse)
   }
 }
