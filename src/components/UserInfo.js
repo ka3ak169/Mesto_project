@@ -11,6 +11,5 @@ export default class Userinfo {
     this._about.textContent = about;
     this._avatar.src = avatar;
     this._id = _id;
-    // console.log(this._id);
   }
 }

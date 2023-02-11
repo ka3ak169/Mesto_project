@@ -57,7 +57,7 @@ export default class Card {
     } else {
       this.addClassLike();
     }
-  }
+  };
 
   addClassLike() {
     this._addLike(this._data._id);
@@ -98,7 +98,7 @@ export default class Card {
 
   _setEventListeners() {
     this._trash.addEventListener("click", () => {
-    this._handleSubmitDeletePopup(this._cardElement);
+      this._handleSubmitDeletePopup(this._cardElement);
     });
     this._like.addEventListener("click", this._cardLike);
     this._image.addEventListener("click", this._handleCardClick);

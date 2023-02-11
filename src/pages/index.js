@@ -52,7 +52,7 @@ const userInfo = new UserInfo({
   about: profileActivity,
   avatar: profileAvatar,
   id: userId,
-  });
+});
 
 // image Popup
 const popupWithImage = new PopupWithImage(imagePopupSelector);
@@ -61,35 +61,20 @@ popupWithImage.setEventListeners();
 let userId;
 
 // User information
-function getUserInfo() {
-  api.getUserInformation()
-  .then((data) => {
-    userId = data._id;  
-    userInfo.setUserInfo(data);
-  })
-  .catch((error) => {console.log(error);
-  })
-}
+const getUserInfo = api.getUserInformation();
 
 // Initial Cards
-function getCards() {
-  api.getInitialCards()
-  .then((data) => {
-    cardsSection.renderItem(data);
+const getCards = api.getInitialCards();
+
+Promise.all([getUserInfo, getCards])
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData);
+    cardsSection.renderItem(cards);
   })
-  .catch((error) => {console.log(error)})
-}
-
-Promise.all([getUserInfo(), getCards()])
-.then(([userData, cards]) => {
-console.log([userData, cards]);
-})
-// .then(data => {
-//   console.log(data);
-//   })
-
-
-
+  .catch((error) => {
+    console.log(error);
+  })
 
 // Section
 const cardsSection = new Section({ renderer }, cardsContainer);
@@ -121,34 +106,40 @@ function createCard(item) {
   function handleDelete(cardbox) {
     popupWithConfirmation.open();
     popupWithConfirmation.setSubmitHandler(() => {
-      api.deleteCard(item._id)
-      .then(() => {
-        popupWithConfirmation.close();
-        card.deleteCard(cardbox);
-      })
-      .catch((error) => {console.log(error)
-      })
+      api
+        .deleteCard(item._id)
+        .then(() => {
+          popupWithConfirmation.close();
+          card.deleteCard(cardbox);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     });
   }
 
   function addLike(itemId) {
-    api.addLike(itemId)
-    .then((data) => {
-      card.getNumberLike(data.likes.length);
-      card.changeColorLike();
-    })
-    .catch((error) => {console.log(error)
-    })
+    api
+      .addLike(itemId)
+      .then((data) => {
+        card.getNumberLike(data.likes.length);
+        card.changeColorLike();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function deleteLike(itemId) {
-    api.deleteLike(itemId)
-    .then((data) => {
-      card.getNumberLike(data.likes.length);
-      card.changeColorLike();
-    })
-    .catch((error) => {console.log(error)
-    })
+    api
+      .deleteLike(itemId)
+      .then((data) => {
+        card.getNumberLike(data.likes.length);
+        card.changeColorLike();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const cardElement = card.generateCard();
@@ -175,16 +166,18 @@ cardPopupAddBtn.addEventListener("click", function () {
 
 function handleAddCardFormSubmit(data) {
   renderLoading(true, "Создать", cardSbmBtn);
-  api.addCard(data)
-  .then((data) => {
-    renderer(data);
-    cardPopupWithForm.close()
-  })
-  .catch((error) => {console.log(error);
-  })
-  .finally(() => {
-    renderLoading(false, 'Создать', cardSbmBtn)
-  })
+  api
+    .addCard(data)
+    .then((data) => {
+      renderer(data);
+      cardPopupWithForm.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      renderLoading(false, "Создать", cardSbmBtn);
+    });
   cardPopupValiadator.disableSubmitButton();
 }
 
@@ -197,26 +190,32 @@ profilePopupWithForm.setEventListeners();
 
 function handleProfileFormSubmit(data) {
   renderLoading(true, "Сохранить", profileSbmBtn);
-  api.changeUserInformation(data)
-  .then(() => { profilePopupWithForm.close()
-  })
-  .catch((error) => {console.log(error)
-  })
-  .finally(() => {
-    renderLoading(false, 'Сохранить', profileSbmBtn)
-  })
+  api
+    .changeUserInformation(data)
+    .then(() => {
+      profilePopupWithForm.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      renderLoading(false, "Сохранить", profileSbmBtn);
+    });
   userInfo.setUserInfo(data);
 }
 
 profileEditBtn.addEventListener("click", () => {
-  api.getUserInformation()
-  .then((data) => {
-    userInfo.setUserInfo(data);
-    profilePopupWithForm.open();
-    profilePopupInputName.value = data.name;
-    profilePopupInputActivity.value = data.about;
-  })
-  .catch((error) => {console.log(error)})
+  api
+    .getUserInformation()
+    .then((data) => {
+      userInfo.setUserInfo(data);
+      profilePopupWithForm.open();
+      profilePopupInputName.value = data.name;
+      profilePopupInputActivity.value = data.about;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 // avatar Popup
@@ -231,16 +230,18 @@ avatarPen.addEventListener("click", function () {
 
 function handleAvatarFormSubmit(data) {
   renderLoading(true, "Сохранить", avatarSbmBtn);
-  api.changeProfileAvatar(data.link)
-  .then((data) => { 
-    userInfo.setUserInfo(data);
-    avatarPopupWithForm.close();
-  })
-  .catch((error) => {console.log(error)
-  })
-  .finally(() => {
-    renderLoading(false, 'Сохранить', avatarSbmBtn)
-  })
+  api
+    .changeProfileAvatar(data.link)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+      avatarPopupWithForm.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      renderLoading(false, "Сохранить", avatarSbmBtn);
+    });
   avatarPopupValiadator.disableSubmitButton();
 }
 
