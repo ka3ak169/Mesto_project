@@ -53,11 +53,13 @@ const userInfo = new UserInfo({
   avatar: profileAvatar,
 });
 
+
 // image Popup
 const popupWithImage = new PopupWithImage(imagePopupSelector);
 popupWithImage.setEventListeners();
 
 let userId;
+let infoObject;
 
 // User information
 const getUserInfo = api.getUserInformation();
@@ -69,6 +71,7 @@ Promise.all([getUserInfo, getCards])
   .then(([userData, cards]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData);
+    infoObject = userInfo.getUserInfo();
     cardsSection.renderItem(cards);
   })
   .catch((error) => {
@@ -186,7 +189,6 @@ const profilePopupWithForm = new PopupWithForm(
   handleProfileFormSubmit
 );
 profilePopupWithForm.setEventListeners();
-
 function handleProfileFormSubmit(data) {
   renderLoading(true, "Сохранить", profileSbmBtn);
   api
@@ -204,17 +206,10 @@ function handleProfileFormSubmit(data) {
 }
 
 profileEditBtn.addEventListener("click", () => {
-  api
-    .getUserInformation()
-    .then((data) => {
-      userInfo.setUserInfo(data);
-      profilePopupWithForm.open();
-      profilePopupInputName.value = data.name;
-      profilePopupInputActivity.value = data.about;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    console.log(infoObject);
+    profilePopupInputName.value = infoObject.name;
+    profilePopupInputActivity.value = infoObject.about;
+    profilePopupWithForm.open();
 });
 
 // avatar Popup
